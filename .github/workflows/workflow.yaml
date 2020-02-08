@@ -21,12 +21,11 @@ env:
   STATEFULSET_NAME: zpm-registry
   TERRAFORM_VERSION: 0.12.17
   GCLOUD_ACTION_VERSION: 275.0.0
-  RUNS_ON_OS: ubuntu-18.04
 
 jobs:
   gcloud-setup-and-build-and-publish-to-GCR:
     name: Setup gcloud utility, Build ZPM image and Publish it to Container Registry
-    runs-on: ${RUNS_ON_OS}
+    runs-on: ubuntu-18.04
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -54,7 +53,7 @@ jobs:
     ## https://www.terraform.io/docs/github-actions/getting-started.html
     ## https://github.com/hashicorp/terraform-github-actions
     name: Provision GKE cluster
-    runs-on: ${RUNS_ON_OS}
+    runs-on: ubuntu-18.04
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -92,7 +91,7 @@ jobs:
     needs:
     - gcloud-setup-and-build-and-publish-to-GCR
     - gke-provisioner
-    runs-on: ${RUNS_ON_OS}
+    runs-on: ubuntu-18.04
     steps:
     - name: Checkout
       uses: actions/checkout@v2
