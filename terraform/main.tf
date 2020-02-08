@@ -14,6 +14,33 @@
   ---------------------------------------------------------------------------------------------------
 */
 
+/*
+  Also, please note that Terraform uses remote bucket. This bucket should be initially created
+  The following commands could be useful for that:
+
+  Check <BUCKET_NAME> availability:
+  $ gsutil acl get gs://<BUCKET_NAME>
+
+  Good answer:
+  BucketNotFoundException: 404 gs://<BUCKET_NAME> bucket does not exist
+
+  "Busy" answer:
+  AccessDeniedException: 403 <YOUR_ACCOUNT> does not have storage.buckets.get access to <BUCKET_NAME>
+
+  Create bucket with versioning:
+  $ gsutil mb -l EU gs://<BUCKET_NAME>
+  
+  $ gsutil versioning get gs://<BUCKET_NAME>
+  gs://<BUCKET_NAME>: Suspended
+
+  $ gsutil versioning set on gs://<BUCKET_NAME>
+
+  $ gsutil versioning get gs://<BUCKET_NAME>
+  gs://<BUCKET_NAME>: Enabled
+
+*/
+
+
 terraform {
   required_version = "~> 0.12"
   backend "gcs" {
